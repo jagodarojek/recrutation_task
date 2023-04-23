@@ -34,11 +34,27 @@
    <#case "kudos">
        <#assign orderClause = "ORDER BY kudos.sum(weight) DESC " />
    <#break>
+  <#-- sorting by the number of kudos from lowest to highest -->
+    <#case "kudosAsc">
+       <#assign orderClause = "ORDER BY kudos.sum(weight) ASC " />
+   <#break>
    <#case "views">
        <#assign orderClause = "ORDER BY metrics.views DESC " />
    <#break>
    <#case "replies">
        <#assign orderClause = "ORDER BY replies.count(*) DESC " />
+   <#break>
+     <#-- Unanswered questions are the questions without the replies, sorting by that -->
+    <#case "noReplies">
+       <#assign orderClause = "ORDER BY replies.count(*)==0 DESC " />
+   <#break>
+     <#-- conversation.solved informs us if the solution exists, sorting by that  -->
+      <#case "noSolution">
+       <#assign orderClause = "ORDER BY conversation.solved ASC " />
+   <#break>
+     <#-- sorting by the post time from lowest to highest -->
+   <#case "postTime">
+       <#assign orderClause = "ORDER BY post-time DESC " />
    <#break>
    <#default>
        <#assign orderClause = "ORDER BY conversation.last_post_time DESC " />
@@ -72,6 +88,10 @@
                    <option value="views" <#if sorting == 'views'>selected</#if>>${text.format("theme-lib.community-activity.views")}</option>
                    <option value="replies" <#if sorting == 'replies'>selected</#if>>${text.format("theme-lib.community-activity.replies")}</option>
                    <option value="kudos" <#if sorting == 'kudos'>selected</#if>>${text.format("theme-lib.community-activity.kudos")}</option>
+                   <option value="postTime" <#if sorting == 'postTime'>selected</#if>>${text.format("theme-lib.community-activity.postTime")}</option>
+                   <option value="kudosAsc" <#if sorting == 'kudosAsc'>selected</#if>>${text.format("theme-lib.community-activity.kudosAsc")}</option>
+                   <option value="noSolution" <#if sorting == 'noSolution'>selected</#if>>${text.format("theme-lib.community-activity.noSolution")}</option>
+                   <option value="noReplies" <#if sorting == 'noReplies'>selected</#if>>${text.format("theme-lib.community-activity.noReplies")}</option>
                </select>
                <#if page.interactionStyle=="idea">
                  <@component id="custom.idea.status.label" />
