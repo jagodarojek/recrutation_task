@@ -204,10 +204,20 @@
    display: flex;
 }
 
+.map-content-gm-button {
+  position:absolute;
+  top: 30px;
+  left: 80%;
+}
+.button-purple{
+  background-color: violet;
+}
+
 .map-content-image {
    padding: 0px 20px;
    display: flex;
    flex-direction: row;
+   position: relative;
 }
 
 .map-content-image > img {
@@ -824,6 +834,9 @@ span.lia-button-link-arrow.lia-button-link-arrow-black {
     </div>
     <div class="map-content-image">
       <img src="https://community.dynatrace.com/html/assets/map with faces.jpg"></img>
+      <div class="map-content-gm-button"> 
+        <button class="button-purple" onclick="location.href='https://www.google.pl/maps'">Google Maps</button>
+      </div>
     </div>
     <div class="map-content-text">
       <div class="map-content-text-1">
